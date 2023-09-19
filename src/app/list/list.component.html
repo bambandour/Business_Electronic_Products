@@ -1,0 +1,106 @@
+
+<div class="block w-2/3 py-3 overflow-x-auto sm:rounded-lg">
+    <div class="flex items-center px-20 py-10 pb-5 bg-white dark:bg-gray-900 left-20" >
+        <div [formGroup]="productForm" class="w-full " >
+            <!-- <span (click)="addPanier()">+</span> -->
+            <table class="w-full text-xl gray-600 dark:text-gray-400">
+                <thead class="text-xl text-left bg-gray-100 text--gray-700 dark:bg-gray-700 dark:text-gray-400 ">
+                    <tr>
+                        <th scope="col" class="px-3 py-3">
+                            Produit
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Prix
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Quantite
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Total
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="paniers">
+                      <tr *ngFor="let panier of paniers.controls; let i = index" [formGroupName]="i">
+                        <td class="px-2 py-4 border-none">
+                          <input type="text" class="border-transparent"  formControlName="libelle" readonly>
+                        </td>
+                        <td class="px-2 py-4 border-none">
+                          <input type="number" class="border-transparent" formControlName="prix"readonly>
+                        </td>
+                        <td class="px-2 py-4 border-none">
+                          <input type="number" class="border-transparent" formControlName="quantite">
+                        </td>
+                        <td class="px-2 py-4 border-none">
+                          <input type="number" class="border-transparent" formControlName="total"readonly>
+                        </td>
+                        <td class="px-2 py-4 text-xl" style="color:red; cursor: pointer;" (click)="removePanier(i)"><i class="fa-solid fa-trash"></i></td>
+                      </tr>
+                  </tbody>
+            </table>
+        </div>
+    </div>
+        <div class="h-full mx-20 bg-white dark:bg-gray-800">
+            <div class=""> 
+                <form action="" [formGroup]="productForm">
+                    <div class="flex items-center w-full h-32 space-x-12 ">
+                        <div class="flex">
+                            <label for="" class="px-4 py-2 ml-2 font-bold text-white bg-red-600 rounded hover:bg-red-700">Réduction</label>
+                            <div class="mr-5">
+                                <input type="number" formControlName="remise" (input)="calculTotal()" class="p-2 border border-gray-300 rounded w-13" placeholder="remise en %" style="color: red;">
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <label for="" class="px-4 py-2 font-bold text-white bg-green-600 rounded w-13 ">MONTANT</label>
+                            <input type="number" formControlName="totaux" class="p-2 border border-gray-300 rounded w-15" placeholder="valeur montant" >
+                        </div>
+                        <div>
+                            <button  data-modal-target="modal" data-modal-toggle="modal" class="p-2 font-bold text-white bg-blue-600 rounded bg-custom-yellow">SUIVANT<i class="fa-solid fa-arrow-right"></i></button>
+                        </div>                    
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+
+  
+  <!-- Main modal -->
+  <div id="modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative w-full max-w-md max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="modal">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                  <span class="sr-only"></span>
+              </button>
+              <div class="px-6 py-6 lg:px-8">
+                  <h3 class="mb-4 text-2xl font-bold text-center text-gray-900 dark:text-white">Terminer la Vente</h3>
+                  <form class="space-y-6" action="" [formGroup]="productForm">
+                    <div>
+                        <label for="" class="block w-full mb-2 text-xl font-bold text-gray-900 text-green-400 dark:text-white">Montant net à payer: <span  class="text-2xl text-green-400">{{productForm.value.totaux}} FCFA</span></label> 
+                    </div>
+                      <div>
+                          <label for=""   class="block mb-2 text-xl font-bold text-gray-900 text-orange-600 dark:text-white">Montant Reçu</label>
+                          <input type="number"  placeholder="Ex:20000" formControlName="encaisse" (input)="calculTotal()" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                      </div>
+                      <div>
+                        <label for="" class="block mb-2 text-xl font-bold text-blue-700 dark:text-white">À rendre</label>
+                        <input type="number" formControlName="rendu"  placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" readonly>
+                    </div>
+                      <div class="flex justify-between px-10">
+                            <button type="submit" data-modal-toggle="modal" class="mx-1 text-white bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">terminer</button>
+                            <button type="button"  class="mx-1 text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">facture</button>
+                            <button type="button" data-modal-toggle="modal" class="mx-1 text-white bg-red-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">annuler</button>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div> 
+  
+
