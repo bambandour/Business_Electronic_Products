@@ -43,30 +43,38 @@
             </table>
         </div>
     </div>
-        <div class="h-full mx-20 bg-white dark:bg-gray-800">
-            <div class=""> 
-                <form action="" [formGroup]="productForm">
-                    <div class="flex items-center w-full h-32 space-x-12 ">
+
+    
+    <div class="flex items-center mx-20 bg-white dark:bg-gray-800">
+        <div class="flex"> 
+            <form action="" [formGroup]="productForm">
+                <div class="flex items-center w-full h-32 space-x-12 ">
+                    <div class="">
                         <div class="flex">
                             <label for="" class="px-4 py-2 ml-2 font-bold text-white bg-red-600 rounded hover:bg-red-700">Réduction</label>
-                            <div class="mr-5">
+                            <div class="">
                                 <input type="number" formControlName="remise" (input)="calculTotal()" class="p-2 border border-gray-300 rounded w-13" placeholder="remise en %" style="color: red;">
                             </div>
                         </div>
-                        <div class="flex">
-                            <label for="" class="px-4 py-2 font-bold text-white bg-green-600 rounded w-13 ">MONTANT</label>
-                            <input type="number" formControlName="totaux" class="p-2 border border-gray-300 rounded w-15" placeholder="valeur montant" >
+                        <div *ngIf="productForm.get('remise')?.hasError('invalidRemise')" class="ml-4 text-red-500">
+                            La remise ne peut pas dépasser 100%.
                         </div>
-                        <div>
-                            <button  data-modal-target="modal" data-modal-toggle="modal" class="p-2 font-bold text-white bg-blue-600 rounded bg-custom-yellow">SUIVANT<i class="fa-solid fa-arrow-right"></i></button>
-                        </div>                    
                     </div>
-                </form>
-            </div>
+                    <div class="flex">
+                        <label for="" class="px-4 py-2 font-bold text-white bg-green-600 rounded w-13 ">MONTANT</label>
+                        <input type="number" formControlName="totaux" class="p-2 border border-gray-300 rounded w-15" placeholder="valeur montant" >
+                    </div>
+                    <div>
+                        <button  data-modal-target="modal" data-modal-toggle="modal" class="p-2 font-bold text-white bg-blue-600 rounded bg-custom-yellow">SUIVANT</button>
+                    </div>                    
+                </div>
+            </form>
         </div>
+    </div>
+        
 </div>
 
-  
+
   <!-- Main modal -->
   <div id="modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative w-full max-w-md max-h-full">
@@ -93,7 +101,7 @@
                         <input type="number" formControlName="rendu"  placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" readonly>
                     </div>
                       <div class="flex justify-between px-10">
-                            <button type="submit" data-modal-toggle="modal" class="mx-1 text-white bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">terminer</button>
+                            <button data-modal-toggle="modal" (click)="onEmitclick()" class="mx-1 text-white bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">terminer</button>
                             <button type="button"  class="mx-1 text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">facture</button>
                             <button type="button" data-modal-toggle="modal" class="mx-1 text-white bg-red-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">annuler</button>
                     </div>

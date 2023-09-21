@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { data } from '../interfaces/product';
 import { ProduitService } from '../services/produit.service';
@@ -11,6 +11,7 @@ import { ProduitService } from '../services/produit.service';
 export class ListComponent {
   productForm!: FormGroup;
   reduction!:number
+  @Output() emitClick:EventEmitter<any>=new EventEmitter()
   // totalNet!:number
 
   constructor(private fb:FormBuilder,private listService: ProduitService){}
@@ -19,7 +20,7 @@ export class ListComponent {
     this.productForm = this.fb.group({
       paniers: this.fb.array([]),
       totaux:[''],
-      remise:[Validators.min(0), Validators.max(100)],
+      remise:[''],
       rendu:[''],
       encaisse:[''],
     });
@@ -50,8 +51,13 @@ export class ListComponent {
     }, 0);
     const remiseValue = this.productForm.get('remise')?.value  || 0;
     const montant=this.productForm.get('encaisse')?.value
+    if (remiseValue > 100 || remiseValue <0) {
+      this.productForm.get('remise')?.setErrors({ 'invalidRemise': true });
+    } else {
+      this.productForm.get('remise')?.setErrors(null);
+    }
+    
     if (remiseValue ) {
-        
         const reducedTotal = totalCost - (totalCost * (remiseValue / 100));
         this.productForm.get('totaux')?.setValue(reducedTotal)
         this.productForm.get('rendu')?.setValue(montant-reducedTotal)
@@ -62,9 +68,11 @@ export class ListComponent {
     return totalCost; 
   }
 
-  updatePannier(event:Event){
-
-
+  // updatePannier(event:Event){
+       
+  // }
+  onEmitclick(){
+    this.emitClick.emit()
   }
   
 

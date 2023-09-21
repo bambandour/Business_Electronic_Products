@@ -13,7 +13,7 @@ export interface Product {
     photo: string
     description: string
     caracteristiques: Caracteristique[]
-    details: Detail[]
+    succursales: Succursale[]
 }
 
 export interface Caracteristique {
@@ -22,7 +22,8 @@ export interface Caracteristique {
     valeur: string
 }
   
-export interface Detail {
+export interface Succursale {
+    id:number
     quantite: number
     prix: number
     prixEnGros: number
@@ -35,3 +36,19 @@ export interface data{
     quantite:number,
     total:number,
 }
+
+export interface Vente {
+    // id: number
+    montant: number
+    reduction: number
+    client_id: number
+    user_id: number|null
+    produits: Commande[]|data[]
+    montant_payer:number
+  }
+  
+  export interface Commande {
+    produit_succursale_id: number
+    quantite_vendu: number
+    prix_vente: number
+  }

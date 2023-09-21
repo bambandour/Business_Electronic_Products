@@ -23,22 +23,24 @@ export class ProduitComponent implements OnInit{
   noProductFound: boolean = false;
   addproduct!:string
   showModal: boolean = false;
-  code:string=""
+  code:string="";
+  btnAjouter:boolean=true;
 
   ngOnInit(): void {
     this.defaultProduct = {
       id:1,
-      libelle: 'Dell',
+      libelle: 'Dell Latitude 3510',
       code:"DEL-1012",
       photo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyl2Ab5M88ohV_8YUvEJKZc6SUTAdAdxEXQw&usqp=CAU",
-      description: 'Latitude 3510 Laptop 14.5 HD screen ,10th Intel Core i5-1021U etat neuf autonomie 5h et plus ',
+      description: 'Laptop 14.5 HD screen ,10th Intel Core i5-1021U etat neuf autonomie 5h et plus ',
       caracteristiques: [
         { id:1,libelle: 'RAM', valeur: '16Go' },
         { id:2,libelle: 'Disc dur', valeur: '512Go SSD' },
         { id:3,libelle: 'processeur', valeur: '2.7GHz' },
       ],
-      details:[
+      succursales:[
         {
+          id:4,
           quantite: 2,
           prix: 150000,
           prixEnGros: 140000,
@@ -46,7 +48,6 @@ export class ProduitComponent implements OnInit{
         },
       ]
     };
-
     this.searchProduct()
   }
 
@@ -71,17 +72,17 @@ export class ProduitComponent implements OnInit{
     if (this.code) {
       this.productService.productSearch(this.code).subscribe(
         (res?)=>{
-          if (res?.data.length > 0) {
+          if (res?.data.length > 0 && res?.data[0].code) {
                 this.product = res?.data;
                 this.noProductFound = false;
-              } else {
-                this.product = [];
-                this.noProductFound = true;
+                this.btnAjouter=false
+          } else {
+              this.product = [];
+              this.noProductFound = true;
           }   
         }
       )
-    }
-    
+    } 
   }
 
   saveProduct(){

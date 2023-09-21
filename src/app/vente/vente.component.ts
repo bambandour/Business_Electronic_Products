@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { data, Product } from '../interfaces/product';
 import { ListComponent } from '../list/list.component';
@@ -14,12 +14,12 @@ export class VenteComponent implements OnInit{
 
   @ViewChild(ListComponent) listComponent!:ListComponent
   @ViewChild(ProduitComponent) produitComponent!:ProduitComponent
-  productForm!:FormGroup
+  @Input() productForm!:FormGroup
   // product!:Product
   
-  constructor(private fb: FormBuilder){
+  constructor(private productService:ProduitService, private fb: FormBuilder){
     this.productForm = this.fb.group({
-      paniers: this.fb.array([]) // Utilisez le FormArray pour stocker les produits dans le panier
+      paniers: this.fb.array([]) 
     });
   }
   ngOnInit(): void {
@@ -48,7 +48,32 @@ export class VenteComponent implements OnInit{
     this.listComponent.paniers.push(panier)
     this.listComponent.calculTotal()
     // this.listComponent.totalNet
-
   }
   
+  validatedCommande(){
+    const productData=this.productForm.value
+    const formattedData = {
+      montant:this.listComponent.productForm.value.totaux,
+      reduction:this.listComponent.productForm.value.remise,
+      client_id:1,
+      user_id:1,
+      produits:this.listComponent.paniers.value,
+      // produits:[
+      //   {
+      //     produit_succursale_id:1,
+      //     quantite_vendu:1,
+      //     prix_vente:1,
+      //   },
+      // ],
+      montant_payer:this.listComponent.productForm.value.totaux,
+    };
+    console.log(formattedData);
+    console.log(this.listComponent.paniers.value);
+    
+    this.productService.add(formattedData).subscribe((res)=>{
+      console.log(res);
+      
+    })
+
+  }
 }
