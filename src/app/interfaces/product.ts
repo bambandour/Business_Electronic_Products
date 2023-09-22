@@ -49,6 +49,6 @@ export interface Vente {
   
   export interface Commande {
     produit_succursale_id: number
-    quantite_vendu: number
-    prix_vente: number
+    quantite: number
+    prix: number
   }

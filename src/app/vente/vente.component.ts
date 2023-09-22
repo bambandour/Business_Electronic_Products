@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { data, Product } from '../interfaces/product';
+import { data, Product, Vente } from '../interfaces/product';
 import { ListComponent } from '../list/list.component';
 import { ProduitComponent } from '../produit/produit.component';
 import { ProduitService } from '../services/produit.service';
@@ -52,23 +52,23 @@ export class VenteComponent implements OnInit{
   
   validatedCommande(){
     const productData=this.productForm.value
+    productData.paniers=this.listComponent.paniers.value.map((panier:data)=>{
+          return{
+            produit_succursale_id: panier.id,
+            quantite: panier.quantite,
+            prix: panier.prix
+          }
+        });
+    // console.log(productData.paniers);
+        
     const formattedData = {
       montant:this.listComponent.productForm.value.totaux,
       reduction:this.listComponent.productForm.value.remise,
       client_id:1,
       user_id:1,
-      produits:this.listComponent.paniers.value,
-      // produits:[
-      //   {
-      //     produit_succursale_id:1,
-      //     quantite_vendu:1,
-      //     prix_vente:1,
-      //   },
-      // ],
+      produits:productData.paniers,
       montant_payer:this.listComponent.productForm.value.totaux,
     };
-    console.log(formattedData);
-    console.log(this.listComponent.paniers.value);
     
     this.productService.add(formattedData).subscribe((res)=>{
       console.log(res);
