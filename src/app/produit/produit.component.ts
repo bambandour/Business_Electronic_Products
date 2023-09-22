@@ -44,7 +44,8 @@ export class ProduitComponent implements OnInit{
           quantite: 2,
           prix: 150000,
           prixEnGros: 140000,
-          succursale: 'succursale A'
+          succursale: 'succursale A',
+          produit_succursale_id:18
         },
       ]
     };

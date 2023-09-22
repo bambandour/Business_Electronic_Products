@@ -28,6 +28,7 @@ export interface Succursale {
     prix: number
     prixEnGros: number
     succursale: string
+    produit_succursale_id: number
 }
 export interface data{
     id:number;

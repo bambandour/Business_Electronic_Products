@@ -39,11 +39,12 @@ export class VenteComponent implements OnInit{
 
   addPanier(data:data){  
       const panier = this.fb.group({
-      id:this.produitComponent.product[0].id,
+      id:this.produitComponent.product[0].succursales[0].produit_succursale_id,
       libelle: this.produitComponent.product[0].libelle,
       prix: data.prix,
       quantite: data.quantite,
-      total: data.prix*data.quantite
+      total: data.prix*data.quantite,
+
     })
     this.listComponent.paniers.push(panier)
     this.listComponent.calculTotal()
@@ -60,7 +61,7 @@ export class VenteComponent implements OnInit{
           }
         });
     // console.log(productData.paniers);
-        
+
     const formattedData = {
       montant:this.listComponent.productForm.value.totaux,
       reduction:this.listComponent.productForm.value.remise,
