@@ -61,7 +61,6 @@ export class VenteComponent implements OnInit{
           }
         });
     // console.log(productData.paniers);
-
     const formattedData = {
       montant:this.listComponent.productForm.value.totaux,
       reduction:this.listComponent.productForm.value.remise,
@@ -72,9 +71,22 @@ export class VenteComponent implements OnInit{
     };
     
     this.productService.add(formattedData).subscribe((res)=>{
+      this.setBackendMessage('La commande a été effectuée avec succès!!'); 
       console.log(res);
       
     })
 
   }
+  backendMessage: string = '';
+  setBackendMessage(message: string): void {
+    this.backendMessage = message;
+    setTimeout(() => {
+      this.clearBackendMessage();
+    }, 4000); 
+  }
+
+  clearBackendMessage(): void {
+    this.backendMessage = '';
+  }
+
 }
