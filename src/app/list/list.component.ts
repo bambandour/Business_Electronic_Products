@@ -23,6 +23,7 @@ export class ListComponent {
       remise:[''],
       rendu:[''],
       encaisse:[''],
+      quantite:[''],
     });
   }
 
@@ -63,14 +64,19 @@ export class ListComponent {
         this.productForm.get('rendu')?.setValue(montant-reducedTotal)
         return reducedTotal; 
     }
+    this.updatePannier
     this.productForm.get('totaux')?.setValue(totalCost)
     this.productForm.get('rendu')?.setValue(montant-totalCost)
     return totalCost; 
   }
 
-  // updatePannier(event:Event){
-       
-  // }
+  updatePannier(event:Event,index:number){
+      //  console.log(this.paniers.value[index].quantite);
+      const qte=this.paniers.at(index).get('quantite')?.value;
+      const price=this.paniers.at(index).get('prix')?.value;
+     const tot= this.paniers.at(index).get('total')?.setValue(price*qte)
+     this.productForm.get('totaux')?.setValue(tot)
+  }
   onEmitclick(){
     this.emitClick.emit()
   }

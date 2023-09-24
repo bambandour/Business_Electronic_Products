@@ -58,10 +58,14 @@
                       <div class="">
                           <label for="quantite" class="block text-sm font-medium text-gray-900 border border-none rounded border-amber-300 dark:text-white">Quantité prix</label>
                           <input type="number" formControlName="quantite" placeholder="quantité" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                          <div *ngIf="productForm.get('quantite')?.value > product[0].succursales[0].quantite" class="text-red-500 ">
+                            la quantite disponible est {{product[0].succursales[0].quantite}}
+                        </div>
                       </div>
                       
-                     <div class="flex items-center justify-arround " >
-                        <button type="button" (click)="saveProduct()" data-modal-toggle="authentication-modal" class=" text-white bg-green-500  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">valider</button>
+                      
+                     <div class="flex items-center justify-arround" >
+                        <button type="button" (click)="saveProduct()" [disabled]="productForm.get('quantite')?.value > product[0].succursales[0].quantite" data-modal-toggle="authentication-modal" class=" text-white bg-green-500  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">valider</button>
                         <button type="button" data-modal-toggle="authentication-modal" class=" text-white bg-red-700 mx-1 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">annuler</button>
                      </div>
                   </form>

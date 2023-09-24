@@ -32,7 +32,7 @@
                           <input type="number" class="border-transparent" formControlName="prix"readonly>
                         </td>
                         <td class="px-2 py-4 border-none">
-                          <input type="number" class="border-transparent" formControlName="quantite">
+                          <input type="number" (input)="updatePannier($event,i)" class="border-transparent" formControlName="quantite">
                         </td>
                         <td class="px-2 py-4 border-none">
                           <input type="number" class="border-transparent" formControlName="total"readonly>
@@ -65,7 +65,7 @@
                         <input type="number" formControlName="totaux" class="p-2 border border-gray-300 rounded w-15" placeholder="valeur montant" >
                     </div>
                     <div>
-                        <button  data-modal-target="modal" data-modal-toggle="modal" class="p-2 font-bold text-white bg-blue-600 rounded bg-custom-yellow">SUIVANT</button>
+                        <button  data-modal-target="modal" [disabled]="productForm.get('remise')?.hasError('invalidRemise')" data-modal-toggle="modal" class="p-2 font-bold text-white bg-blue-600 rounded bg-custom-yellow">SUIVANT</button>
                     </div>                    
                 </div>
             </form>

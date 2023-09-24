@@ -73,7 +73,7 @@ export class ProduitComponent implements OnInit{
     if (this.code) {
       this.productService.productSearch(this.code).subscribe(
         (res?)=>{
-          if (res?.data.length > 0 && res?.data[0].code) {
+          if (res?.data.length > 0 && res?.data[0].code!==undefined &&res?.data[0].photo!==null) {
                 this.product = res?.data;
                 this.noProductFound = false;
                 this.btnAjouter=false

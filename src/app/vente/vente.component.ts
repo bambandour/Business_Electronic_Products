@@ -15,7 +15,9 @@ export class VenteComponent implements OnInit{
   @ViewChild(ListComponent) listComponent!:ListComponent
   @ViewChild(ProduitComponent) produitComponent!:ProduitComponent
   @Input() productForm!:FormGroup
+  backendMessage: string = '';
   // product!:Product
+  vider=""
   
   constructor(private productService:ProduitService, private fb: FormBuilder){
     this.productForm = this.fb.group({
@@ -69,15 +71,21 @@ export class VenteComponent implements OnInit{
       produits:productData.paniers,
       montant_payer:this.listComponent.productForm.value.totaux,
     };
-    
-    this.productService.add(formattedData).subscribe((res)=>{
-      this.setBackendMessage('La commande a été effectuée avec succès!!'); 
-      console.log(res);
-      
-    })
+    console.log(formattedData);
+
+    this.setBackendMessage('Vous n\'avez pas encore commandé de produit !!'); 
+    this.listComponent.paniers.clear()
+    // this.productService.add(formattedData).subscribe((res)=>{
+    //   this.listComponent.productForm.patchValue({
+    //     totaux: "",
+    //     remise: "", 
+    //   });
+    //   this.setBackendMessage('La commande a été effectuée avec succès!!'); 
+    //   this.listComponent.paniers.clear()
+    // })
 
   }
-  backendMessage: string = '';
+  
   setBackendMessage(message: string): void {
     this.backendMessage = message;
     setTimeout(() => {
