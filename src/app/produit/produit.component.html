@@ -11,14 +11,14 @@
             <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 
                 <!-- <img class="pt-5 rounded-t-lg justify-centermax-w-sm" src="{{ product ? product[0].photo : defaultProduct.photo }}" alt="{{ product ? product[0].libelle : defaultProduct.libelle }}" class="w-full max-h-96" /> -->
-                <img  class="justify-center max-w-sm pt-5 rounded-t-lg" src="{{ product ? product[0].photo : defaultProduct.photo }}" alt="{{ product ? product[0].libelle : defaultProduct.libelle }}" class="w-full max-h-96" />
+                <img  class="justify-center max-w-sm pt-5 rounded-t-lg" src="{{ product ? product[0].photo : defaultProduct.photo }}" alt="{{ product ? product[0].libelle : defaultProduct.description }}" class="w-full max-h-96" />
 
 
         
                 <div class="p-5" >
                     <h1 class="text-2xl text-center text-blue-600" >{{ product ? product[0].libelle : defaultProduct.libelle }}</h1>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ product ? product[0].description : defaultProduct.description }}</p>
-                    <div *ngFor="let caracteristique of (product ? product[0].caracteristiques : defaultProduct.caracteristiques)">
+                    <div *ngFor="let caracteristique of (product ? product[0]?.caracteristiques : defaultProduct.caracteristiques)">
                         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ caracteristique.libelle }}: {{ caracteristique.valeur }}</p>
                     </div>
                     <div>
@@ -52,15 +52,18 @@
                   <h3 class="mb-4 text-xl font-medium text-center text-gray-900 dark:text-white">Vente: <span class="text-2xl text-red-600">{{ product ? product[0].libelle : defaultProduct.libelle }}</span> </h3>
                   <form [formGroup]="productForm" class="space-y-6">
                       <div class="">
-                          <label for="email" class="block text-sm font-medium text-black text-gray-900 border border-green-500 border-none rounded dark:text-white" >Prix de Vente</label>
-                          <input type="number" formControlName="prix" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="entrer le prix " required>
+                          <label for="email" class="block text-xl font-bold text-black text-gray-900 border border-green-500 border-none rounded dark:text-white" >Prix de Vente</label>
+                          <input type="number" formControlName="prix" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Entrer le prix " required>
                       </div>
                       <div class="">
-                          <label for="quantite" class="block text-sm font-medium text-gray-900 border border-none rounded border-amber-300 dark:text-white">Quantité prix</label>
-                          <input type="number" formControlName="quantite" placeholder="quantité" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                          <div *ngIf="productForm.get('quantite')?.value > product[0].succursales[0].quantite" class="text-red-500 ">
+                          <label for="quantite" class="block text-xl font-bold text-gray-900 border border-none rounded border-amber-300 dark:text-white">Quantité</label>
+                          <input type="number" formControlName="quantite" placeholder="Entrer la quantité" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                          <div *ngIf="productForm.get('quantite')?.value > product[0].succursales[0].quantite" class="text-xl text-red-600">
                             la quantite disponible est {{product[0].succursales[0].quantite}}
-                        </div>
+                          </div>
+                        <!-- <div *ngIf="!product || !product[0] || !product[0].succursales || !product[0].succursales[0]">
+                            Les données ne sont pas disponibles.           
+                        </div> -->
                       </div>
                       
                       

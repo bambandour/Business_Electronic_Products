@@ -45,7 +45,7 @@ export class ProduitComponent implements OnInit{
           prix: 150000,
           prixEnGros: 140000,
           succursale: 'succursale A',
-          produit_succursale_id:18
+          produit_succursale_id:17
         },
       ]
     };

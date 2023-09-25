@@ -10,6 +10,7 @@ import { ProductPipe } from './product.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VenteComponent } from './vente/vente.component';
+import { ListProduitComponent } from './list-produit/list-produit.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { VenteComponent } from './vente/vente.component';
     NavBarreComponent,
     ListComponent,
     ProductPipe,
-    VenteComponent
+    VenteComponent,
+    ListProduitComponent
   ],
   imports: [
     BrowserModule,

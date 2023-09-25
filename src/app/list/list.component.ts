@@ -13,6 +13,7 @@ export class ListComponent {
   reduction!:number
   @Output() emitClick:EventEmitter<any>=new EventEmitter()
   // totalNet!:number
+  btnSave:boolean=true;
 
   constructor(private fb:FormBuilder,private listService: ProduitService){}
 
@@ -48,23 +49,25 @@ export class ListComponent {
   calculTotal() {
     const totalCost = this.paniers.controls.reduce((total, panierGroup) => {
       const som = panierGroup.get('total')?.value;
-      return total + (som || 0); 
+      return total + (som || 0);
     }, 0);
     const remiseValue = this.productForm.get('remise')?.value  || 0;
-    const montant=this.productForm.get('encaisse')?.value
-    if (remiseValue > 100 || remiseValue <0) {
-      this.productForm.get('remise')?.setErrors({ 'invalidRemise': true });
-    } else {
-      this.productForm.get('remise')?.setErrors(null);
-    }
+    const montant=this.productForm.get('encaisse')?.value;
     
-    if (remiseValue ) {
+
+    if (remiseValue) {
+      if (remiseValue > 100 || remiseValue <0) {
+        this.productForm.get('remise')?.setErrors({ 'invalidRemise': true });
+        this.productForm.get('totaux')?.setValue(0);
+      } else {
+        this.productForm.get('remise')?.setErrors(null);
+
         const reducedTotal = totalCost - (totalCost * (remiseValue / 100));
-        this.productForm.get('totaux')?.setValue(reducedTotal)
-        this.productForm.get('rendu')?.setValue(montant-reducedTotal)
-        return reducedTotal; 
+        this.productForm.get('totaux')?.setValue(reducedTotal);
+        this.productForm.get('rendu')?.setValue(montant-reducedTotal);
+        return reducedTotal;
+      }
     }
-    this.updatePannier
     this.productForm.get('totaux')?.setValue(totalCost)
     this.productForm.get('rendu')?.setValue(montant-totalCost)
     return totalCost; 
@@ -74,8 +77,9 @@ export class ListComponent {
       //  console.log(this.paniers.value[index].quantite);
       const qte=this.paniers.at(index).get('quantite')?.value;
       const price=this.paniers.at(index).get('prix')?.value;
-     const tot= this.paniers.at(index).get('total')?.setValue(price*qte)
-     this.productForm.get('totaux')?.setValue(tot)
+      const tot= this.paniers.at(index).get('total')?.setValue(price*qte)
+      this.productForm.patchValue({totaux:this.calculTotal()})
+      
   }
   onEmitclick(){
     this.emitClick.emit()
