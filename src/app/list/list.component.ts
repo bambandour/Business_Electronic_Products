@@ -54,7 +54,7 @@ export class ListComponent {
     const remiseValue = this.productForm.get('remise')?.value  || 0;
     const montant=this.productForm.get('encaisse')?.value;
     
-
+    
     if (remiseValue) {
       if (remiseValue > 100 || remiseValue <0) {
         this.productForm.get('remise')?.setErrors({ 'invalidRemise': true });
@@ -79,7 +79,6 @@ export class ListComponent {
       const price=this.paniers.at(index).get('prix')?.value;
       const tot= this.paniers.at(index).get('total')?.setValue(price*qte)
       this.productForm.patchValue({totaux:this.calculTotal()})
-      
   }
   onEmitclick(){
     this.emitClick.emit()
