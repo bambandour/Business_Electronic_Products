@@ -3,8 +3,6 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Caracteristique, Categorie, Marque, Product } from '../interfaces/product';
 import { LoginService } from '../services/login.service';
 import { ProductService } from '../services/product.service';
-import { ProduitService } from '../services/produit.service';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-ajout-produit',
@@ -99,8 +97,8 @@ export class AjoutProduitComponent {
       libelle:this.addForm.value.libelle,
       code:this.addForm.value.code,
       photo:this.addForm.value.photo,
-      marque:this.addForm.value.marque,
-      categorie:this.addForm.value.categorie,
+      marque:this.addForm.value.marque.id,
+      categorie:this.addForm.value.categorie.id,
       succursales:[
         {
           succursale_id:this.addForm.value.succursale_id,
@@ -111,11 +109,11 @@ export class AjoutProduitComponent {
       caracteristiques:produitForm.caracteristiques
     }
     console.log(data);
-    this.productService.addProduct(data).subscribe(res=>{
-        console.log(res);
-        this.addForm.reset();
-        this.caracteristiques.clear();
-    })
+    // this.productService.addProduct(data).subscribe(res=>{
+    //     console.log(res);
+    //     this.addForm.reset();
+    //     this.caracteristiques.clear();
+    // })
   }
 
 

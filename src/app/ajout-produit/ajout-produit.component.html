@@ -62,7 +62,7 @@
                         <select id="countries" formControlName="marque"
                             class="bg-gray-50 border border-gray-300 text-black text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Choisie une marque</option>
-                            <option *ngFor="let marque of marques" value={{marque.id}}>{{marque.libelle}}</option>
+                            <option *ngFor="let marque of marques" [ngValue]="marque">{{marque.libelle}}</option>
                         </select>
                     </div>
                     <div class="relative z-0 w-full mb-6 group">
@@ -72,7 +72,7 @@
                         <select id="countries" formControlName="categorie"
                             class="bg-gray-50 border border-gray-300 text-black text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Choisie une catégorie</option>
-                            <option *ngFor="let categorie of categories"  value={{categorie.id}}>{{categorie.libelle}}</option>
+                            <option *ngFor="let categorie of categories"  [ngValue]="categorie">{{categorie.libelle}}</option>
                         </select>
                     </div>
                 </div>
