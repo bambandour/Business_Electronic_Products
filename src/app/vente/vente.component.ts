@@ -75,6 +75,8 @@ export class VenteComponent implements OnInit{
 
     this.setBackendMessage('Vous n\'avez pas encore commandé de produit !!'); 
     this.listComponent.paniers.clear()
+
+    
     // this.productService.add(formattedData).subscribe((res)=>{
     //   this.listComponent.productForm.patchValue({
     //     totaux: "",

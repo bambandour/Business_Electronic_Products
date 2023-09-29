@@ -12,21 +12,41 @@ export interface Product {
     code: string
     photo: string
     description: string
+    marque:Marque
+    categorie:Categorie
     caracteristiques: Caracteristique[]
     succursales: Succursale[]
 }
 
-export interface Caracteristique {
+export interface Marque {
     id: number
     libelle: string
-    valeur: string
 }
+
+export interface Categorie {
+    id: number
+    libelle: string
+}
+
+export interface Caracteristique {
+    id: number
+    caracteristique_id?:Categorie
+    libelle: string
+    valeur: string
+
+}
+
+// export interface Caracteristique {
+//   id: number
+//   libelle: string
+//   valeur: string
+// }
   
 export interface Succursale {
     id:number
     quantite: number
     prix: number
-    prixEnGros: number
+    prixEnGros?: number
     succursale: string
     produit_succursale_id: number
 }
@@ -53,3 +73,27 @@ export interface Vente {
     quantite: number
     prix: number
   }
+
+  export interface User{
+    id:number
+    login:string
+    nomComplet:string
+    telephone:string
+    succursale_id:number
+    succursale:string
+  }
+
+  export interface Connexion {
+    token:string
+    user:User
+  }
+
+
+  export interface All{
+    marques:Marque[]
+    categories:Categorie[]
+    caracteristiques:Caracteristique[]
+  }
+
+
+

@@ -1,0 +1,143 @@
+<div class="flex items-center justify-center h-screen ">
+    <!-- <div class="flex justify-center p-4">
+        <div class="">
+            <img class="w-20 h-20 rounded-full" src="assets/img/bbc.png" alt="">
+        </div>
+        <div class="pt-6 pl-10 text-2xl font-bold">
+            <h1>Ajout de produits <span class="text-red-600">
+                    </span></h1>
+        </div>
+    </div> -->
+    
+    <div class="border-2  text-gray-500 w-[60%] h-45 p-8 flex flex-column justify-center items-center">
+        <form [formGroup]="addForm">
+            <div class="flex items-center justify-start p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-500 dark:text-white">
+                    Nouveau Produit
+                </h3>
+            </div>
+            <div>
+                <div class="hidden">
+                    <input type="" hidden formControlName="succursale_id">
+                </div>
+                <div class="grid mt-4 mb-2 md:grid-cols-4 md:gap-6">
+                    <div class="relative z-0 w-full col-span-2 p-4 mb-6 group">
+                        <input type="text" formControlName="libelle" id="libelle"
+                            class="block py-2.5 px-0 w-full text-2xl text-black text-center bg-transparent  rounded-lg border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder="" required />
+                            <!-- <input type="search" name="" id=""
+                                    class="bg-gray-50 border px-0  py-2.5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white  block peer"> -->
+                        <label for="libelle"
+                            class="peer-focus:font-medium absolute text-3xl  dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            Article</label>
+                    </div>
+                    <div class="relative z-0 w-full p-4 mb-6 group">
+                        <input type="text" formControlName="prix" id="floating_last_name"
+                            class="block py-2.5 px-0 w-full text-2xl text-center text-black bg-transparent  rounded-lg border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder="" required />
+
+                            <!-- <input type="search" name="" id=""
+                                    class="bg-gray-50 border px-0  py-2.5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white  block"> -->
+                        <label for="prix"
+                            class="peer-focus:font-medium absolute text-3xl  dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            Prix</label>
+                    </div>
+                    <div class="relative z-0 w-full p-4 mb-6 group">
+                        <input type="text" formControlName="quantite" id="floating_last_name"
+                            class="block py-2.5 px-0 w-full text-2xl text-center text-black bg-transparent rounded-lg  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder="" required />
+
+                            <!-- <input type="search" name="" id=""
+                                    class="bg-gray-50 border px-0  py-2.5 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white  block peer"> -->
+                        <label for="quantite"
+                            class="peer-focus:font-medium absolute text-3xl  dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            Quantité</label>
+                    </div>
+                </div>
+                <div class="grid mb-2 md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-6 group">
+                        <label for="countries" class="block mb-2 text-2xl font-medium dark:text-white">
+                            Marque
+                        </label>
+                        <select id="countries" formControlName="marque"
+                            class="bg-gray-50 border border-gray-300 text-black text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Choisie une marque</option>
+                            <option *ngFor="let marque of marques" value={{marque.id}}>{{marque.libelle}}</option>
+                        </select>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                        <label for="countries" class="block mb-2 text-2xl font-medium dark:text-white">
+                            Catégorie
+                        </label>
+                        <select id="countries" formControlName="categorie"
+                            class="bg-gray-50 border border-gray-300 text-black text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Choisie une catégorie</option>
+                            <option *ngFor="let categorie of categories"  value={{categorie.id}}>{{categorie.libelle}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-row-reverse gap-52">
+                    <div class="col-span-1 w-[20%] h-[20%] relative ">
+                        <label class="items-center block pl-4 text-xl cursor-pointer form-label" for="photo">Image du produit</label>
+                        <img class="object-cover mb-4 cursor-pointer w-25 h-25"  [src]="photo.value" alt="" >
+                        <input type="file" id="fileInput" class="absolute bottom-4 w-[100%] h-[100%] opacity-0 cursor-pointer" (change)="onPhotoChange($event)" formControlName="photo" value="">
+                    </div>
+                    <div class="flex flex-col border-2 border-blue-300 h-[30%] w-[15%] bg-gray-200 m-3 rounded-lg">
+                        <span class="items-center ml-10 text-sm text-black" >CODE:</span>
+                        <span class="ml-4 text-4xl text-black">000000</span>
+                    </div>
+                </div>
+                <div  formArrayName="caracteristiques" class="mt-5 overflow-y-auto max-h-40">
+                    <div   *ngFor="let item of caracteristiques.controls; let i = index" [formGroupName]="i"
+                        class="grid grid-cols-4 gap-4">
+                        <div class="relative z-0 w-full col-span-1 mb-6 group">
+                            <select id="countries" formControlName="caracteristique_id"
+                                class="bg-gray-50 border border-gray-300 text-black text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected>Choisie une caractéristique</option>
+                                <option *ngFor="let car of cars"   [ngValue]="car">{{car.libelle}}</option>
+                            </select>
+                        </div>
+                        <div class="relative z-0 w-full col-span-1 mb-6 group">
+                            <input type="text" formControlName="valeur" id="valeur"
+                                class="block py-2.5 px-0 w-full text-2xl text-center text-black rounded-lg bg-transparent  border-gray-300  dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                placeholder="" required />
+                                
+                            <label for="valeur"
+                                class="absolute text2xl bottom-10 ">
+                                </label>
+                        </div>
+                        <!-- <div class="relative z-0 w-full col-span-1 mb-6 group">
+                            <select id="countries" 
+                                class="bg-gray-50 border border-gray-300 text-black text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected>Choisie l'unité</option>
+                                <option  [value]="">
+                                    
+                                </option>
+                            </select>
+                        </div> -->
+                        <div (click)="removeCar(i)"
+                            class="flex items-center justify-center w-8 h-8 mt-2 text-xl text-red-700 border border-red-500 cursor-pointer">
+                            x
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row-reverse mr-12">
+                    <button  type="button" (click)="addCar()"
+                        class=" border border-blue-300 hover:bg-blue-600 hover:text-white focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        Ajouter une caractéristique
+                    </button>
+                </div>
+            
+            </div>
+
+            <div class="flex flex-row-reverse gap-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button type="button" (click)="addProduct()"
+                    class=" bg-green-600 text-white hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Terminer</button>
+                <button type="button"
+                    class="text-white bg-red-600  focus:ring-4  rounded-lg border border-gray-500 text-sm font-medium px-5 py-2.5 hover:text-white focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+#userDropdown {
+    position: absolute;
+    z-index: 999; /* Vous pouvez ajuster cette valeur si nécessaire */
+    /* Autres styles (par exemple, top, left, etc.) */
+  }

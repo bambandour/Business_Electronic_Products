@@ -7,10 +7,15 @@ import { ProduitComponent } from './produit/produit.component';
 import { NavBarreComponent } from './nav-barre/nav-barre.component';
 import { ListComponent } from './list/list.component';
 import { ProductPipe } from './product.pipe';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VenteComponent } from './vente/vente.component';
 import { ListProduitComponent } from './list-produit/list-produit.component';
+import { LoginComponent } from './login/login.component';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthTokenInterceptor } from './auth.interceptor';
+import { AjoutProduitComponent } from './ajout-produit/ajout-produit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,9 @@ import { ListProduitComponent } from './list-produit/list-produit.component';
     ListComponent,
     ProductPipe,
     VenteComponent,
-    ListProduitComponent
+    ListProduitComponent,
+    LoginComponent,
+    AjoutProduitComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +35,15 @@ import { ListProduitComponent } from './list-produit/list-produit.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientXsrfModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

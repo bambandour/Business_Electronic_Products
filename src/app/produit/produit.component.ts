@@ -17,9 +17,41 @@ export class ProduitComponent implements OnInit{
     });
   }
   productForm!:FormGroup
-  product!:Product[]
+
+  defaultProduct:Product = {
+    id:1,
+    libelle: 'Dell Latitude 3510',
+    code:"DEL-1012",
+    photo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyl2Ab5M88ohV_8YUvEJKZc6SUTAdAdxEXQw&usqp=CAU",
+    description: 'Laptop 14.5 HD screen ,10th Intel Core i5-1021U etat neuf autonomie 5h et plus ',
+    caracteristiques: [
+      { id:1,libelle: 'RAM', valeur: '16Go' },
+      { id:2,libelle: 'Disc dur', valeur: '512Go SSD' },
+      { id:3,libelle: 'processeur', valeur: '2.7GHz' },
+    ],
+    marque:{
+      id:1,
+      libelle:"Dell"
+    },
+    categorie:{
+      id:1,
+      libelle:"Ordinateur Portable"
+    },
+    succursales:[
+      {
+        id:4,
+        quantite: 2,
+        prix: 150000,
+        prixEnGros: 140000,
+        succursale: 'succursale A',
+        produit_succursale_id:17
+      },
+    ]
+  };
+
+  product:Product[]=[this.defaultProduct]
   @Output() addPanier=new EventEmitter()
-  defaultProduct!:Product
+  // defaultProduct!:Product
   noProductFound: boolean = false;
   addproduct!:string
   showModal: boolean = false;
@@ -27,30 +59,9 @@ export class ProduitComponent implements OnInit{
   btnAjouter:boolean=true;
 
   ngOnInit(): void {
-    this.defaultProduct = {
-      id:1,
-      libelle: 'Dell Latitude 3510',
-      code:"DEL-1012",
-      photo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyl2Ab5M88ohV_8YUvEJKZc6SUTAdAdxEXQw&usqp=CAU",
-      description: 'Laptop 14.5 HD screen ,10th Intel Core i5-1021U etat neuf autonomie 5h et plus ',
-      caracteristiques: [
-        { id:1,libelle: 'RAM', valeur: '16Go' },
-        { id:2,libelle: 'Disc dur', valeur: '512Go SSD' },
-        { id:3,libelle: 'processeur', valeur: '2.7GHz' },
-      ],
-      succursales:[
-        {
-          id:4,
-          quantite: 2,
-          prix: 150000,
-          prixEnGros: 140000,
-          succursale: 'succursale A',
-          produit_succursale_id:17
-        },
-      ]
-    };
-    this.searchProduct()
+    // this.searchProduct()
   }
+
 
   get paniers() {
     return this.productForm.get('paniers') as FormArray;
