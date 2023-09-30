@@ -45,11 +45,6 @@ export class AjoutProduitComponent {
     })
   }
 
-  // loadCar(){
-  //   this.productService.getAll().subscribe(res=>{
-  //   })
-  // }
-
   get photo(){
     return this.addForm.controls['photo']
   }
@@ -109,11 +104,11 @@ export class AjoutProduitComponent {
       caracteristiques:produitForm.caracteristiques
     }
     console.log(data);
-    // this.productService.addProduct(data).subscribe(res=>{
-    //     console.log(res);
-    //     this.addForm.reset();
-    //     this.caracteristiques.clear();
-    // })
+    this.productService.addProduct(data).subscribe(res=>{
+        console.log(res);
+        this.addForm.reset();
+        this.caracteristiques.clear();
+    })
   }
 
 
